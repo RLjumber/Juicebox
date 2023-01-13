@@ -6,11 +6,24 @@ const { client,
 
 async function createInitialUsers() {
     try {
-        const albert = await createUser({ username: 'albert', password: 'bertie99' });
+        
+        await createUser({
+                username: 'Jake the dog',
+                password: 'jtdogson'
+                });
+        await createUser({
+                username: 'Finn the human',
+                password: 'adventuretime!'
+                });
+        await createUser({
+                username: 'BMO',
+                password: 'itsMOtime'
+                });        
 
-        console.log(albert);
+
+        // console.log(albert);
     } catch(error) {
-        console.error("Oops! Ran into an error dropping the tables!", error);
+        console.error("Error creating users!", error);
         throw error;
         }
 };
@@ -56,7 +69,7 @@ async function  testDB() {
 
         console.log("database tested!");
     } catch (error) {
-        console.log("error!", error);
+        console.log("Error, databases not tested successfully!", error);
         console.error(error);
     }
 };
