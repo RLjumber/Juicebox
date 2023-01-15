@@ -1,23 +1,30 @@
 const { client, 
         getAllUsers,
-        createUser,
+        createUsers,
+        updateUsers,
      } = require('./index');
 
 
 async function createInitialUsers() {
     try {
         
-        await createUser({
-                username: 'Jake the dog',
-                password: 'jtdogson'
+        await createUsers({
+                username: 'Jdizzle',
+                password: 'jtdogson',
+                name: 'Jake the Dog',
+                location: '50th dead world'
                 });
-        await createUser({
-                username: 'Finn the human',
-                password: 'adventuretime!'
+        await createUsers({
+                username: 'Davey_J0hnson',
+                password: 'adventuretime!',
+                name: 'Finn the human',
+                location: 'The Treehouse'
                 });
-        await createUser({
-                username: 'BMO',
-                password: 'itsMOtime'
+        await createUsers({
+                username: '010101',
+                password: 'itsMOtime',
+                name: 'BMO',
+                location: '"Mo" Co.'
                 });        
 
 
@@ -49,7 +56,10 @@ async function createTables() {
             CREATE TABLE users (
                 id SERIAL PRIMARY KEY,
                 username varchar(255) UNIQUE NOT NULL,
-                password varchar(255) NOT NULL
+                password varchar(255) NOT NULL,
+                name varchar(255) NOT NULL,
+                location varchar(255) NOT NULL,
+                active BOOLEAN DEFAULT TRUE
                 );
             `);
 
@@ -65,7 +75,14 @@ async function  testDB() {
         console.log("testing database...")
 
         const users = await getAllUsers();
-        console.log("getAllUsers: ", users);
+        console.log("Getting all users...", users);
+
+        console.log("Updating users at [0]");
+        const updatedUser = await updateUsers(users[0].id, {
+            name: "Ice King",
+            location: "Ice Kingdom"
+        });
+        console.log(updatedUser, "User at [0] updated!")
 
         console.log("database tested!");
     } catch (error) {
