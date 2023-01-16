@@ -81,12 +81,7 @@ async function createPost({
 };
 
 async function updatePosts(id, fields = {}) {
-    // read off tags, may be undefined
-    const { tags } = fields;
-    // remove that field
-    delete fields.tags;
 
-    
     const setString = Object.keys(fields).map(
         (key, index) => `"${ key }"=$${ index + 1 }`
     ).join(', ');
