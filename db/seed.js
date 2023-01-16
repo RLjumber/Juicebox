@@ -39,6 +39,7 @@ async function dropTables() {
     try {
         console.log("dropping tables...");
 
+        await client.query(`DROP TABLE IF EXISTS posts;`);
         await client.query(`DROP TABLE IF EXISTS users;`);
 
         console.log("tables dropped!");
@@ -70,6 +71,28 @@ async function createTables() {
     }
 };
 
+async function createPosts() {
+    try {
+        console.log("building tables...");
+
+        await client.query(`
+            CREATE TABLE posts (
+                id SERIAL PRIMARY KEY,
+                "authorId" INTEGER REFERENCES users(id) NOT NULL,
+                title varchar(255) NOT NULL,
+                content TEXT NOT NULL,
+                active BOOLEAN DEFAULT true
+                );
+            `);
+
+            console.log("Posts built!");
+    } catch(error) {
+        console.error("Couldn't build the posts!", error);
+        throw error;
+    }
+};
+
+
 async function  testDB() {
     try {
         console.log("testing database...")
@@ -98,6 +121,7 @@ async function rebuildDB() {
       await dropTables();
       await createTables();
       await createInitialUsers();
+      await createPosts();
     } catch (error) {
       throw error;
     }
