@@ -2,7 +2,20 @@ const PORT = 3000;
 const express = require('express');
 const server = express();
 
+// connect our client
+const { client } = require('./db');
+client.connect();
 
+// logs our middleware
+const morgan = require('morgan');
+server.use(morgan('dev'));
+
+// parses our data into json format
+server.use(express.json());
+
+// makes a request using apiRouter to /api/users
+const apiRouter = require('./api');
+server.use('/api', apiRouter);
 
 
 server.use((req, res, next) => {
@@ -13,11 +26,9 @@ server.use((req, res, next) => {
     next();
   });
 
-const apiRouter = require('./api');
-server.use('/api', apiRouter);
 
 server.listen(PORT, () => {
-  console.log('The server is up on port', PORT)
+  console.log('The server is up on port', PORT);
 });
 
 
