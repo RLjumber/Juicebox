@@ -1,4 +1,4 @@
-const express = require ('express');
+const express = require('express');
 const postsRouter = express.Router();
 const { getAllPosts } = require('../db')
 
@@ -20,5 +20,4 @@ postsRouter.get('/', async (req, res) => {
 });
 
 
-
-module.exports=postsRouter;
+module.exports = postsRouter;
