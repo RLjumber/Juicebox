@@ -18,6 +18,11 @@ usersRouter.get('/', async (req, res) => {
     });
 });
 
+
+// json web token stuff!
+const jwt = require('jsonwebtoken');
+
+
 usersRouter.post('/login', async (req, res, next) => {
     const { username, password } = req.body;
 
@@ -33,7 +38,10 @@ usersRouter.post('/login', async (req, res, next) => {
     
         if (user && user.password == password) {
           // create token & return to user
-          res.send({ message: "you're logged in!" });
+          const token = jwt.sign({ id: user.id, username: username }, process.env.JWT_SECRET);
+
+
+          res.send({ message: "you're logged in!", token: token });
         } else {
           next({ 
             name: 'IncorrectCredentialsError', 
@@ -45,6 +53,8 @@ usersRouter.post('/login', async (req, res, next) => {
         next(error);
       }
 });
+
+
 
 
 module.exports = usersRouter;
