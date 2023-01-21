@@ -1,7 +1,6 @@
 const express = require('express');
 const usersRouter = express.Router();
-const { getAllUsers, getUserByUsername } = require('../db');
-
+const { getAllUsers } = require('../db');
 
 usersRouter.use((req, res, next) =>
 {
@@ -9,7 +8,6 @@ usersRouter.use((req, res, next) =>
 
     next();
 });
-
 
 usersRouter.get('/', async (req, res) => {
     const users = await getAllUsers();
