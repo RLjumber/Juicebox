@@ -1,6 +1,7 @@
 const express = require('express');
 const usersRouter = express.Router();
-const { getAllUsers } = require('../db');
+const { getAllUsers, getUserByUsername } = require('../db');
+// username was not defined because getUserByUsername was not imported from ../db
 
 usersRouter.use((req, res, next) =>
 {
