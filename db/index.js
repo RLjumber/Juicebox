@@ -241,7 +241,7 @@ async function getPostsByTagName(tagName) {
   } catch (error) {
     throw error;
   }
-} 
+}; 
 
 /**
  * TAG Methods
@@ -279,7 +279,7 @@ async function createTags(tagList) {
   } catch (error) {
     throw error;
   }
-}
+};
 
 async function createPostTag(postId, tagId) {
   try {
@@ -291,7 +291,7 @@ async function createPostTag(postId, tagId) {
   } catch (error) {
     throw error;
   }
-}
+};
 
 async function addTagsToPost(postId, tagList) {
   try {
@@ -305,7 +305,7 @@ async function addTagsToPost(postId, tagList) {
   } catch (error) {
     throw error;
   }
-}
+};
 
 async function getAllTags() {
   try {
@@ -317,6 +317,18 @@ async function getAllTags() {
   } catch (error) {
     throw error;
   }
+};
+
+async function getUserByUsername(username) {
+  try {
+    const { rows: [user] } = await client.query(`
+      SELECT * FROM users WHERE username=$1;
+    `, [username]) //whats this array with username for?
+
+    return user;
+  } catch (error) {
+    throw error;
+  } 
 }
 
 
@@ -334,5 +346,6 @@ module.exports = {
   createTags,
   getAllTags,
   createPostTag,
-  addTagsToPost
+  addTagsToPost,
+  getUserByUsername
 }

@@ -1,6 +1,9 @@
+require('dotenv').config();
 const PORT = 3000;
 const express = require('express');
 const server = express();
+
+// This is where the jwt secret was logged
 
 // connect our client
 const { client } = require('./db');
