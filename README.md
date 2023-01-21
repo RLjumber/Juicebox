@@ -1,3 +1,3 @@
-# Juicebox
+# Juicebox database and server
 
-Test 2 
+Collaborated with Julian Schieneman via Fullstack Academy
