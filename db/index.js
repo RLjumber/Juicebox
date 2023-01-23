@@ -24,7 +24,7 @@ async function createUser({
   } catch (error) {
     throw error;
   }
-}
+};
 
 async function updateUser(id, fields = {}) {
   // build the set string
