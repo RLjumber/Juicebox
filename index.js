@@ -16,7 +16,7 @@ server.use(morgan('dev'));
 // parses our data into json format
 server.use(express.json());
 
-// makes a request using apiRouter to /api/users
+// makes a request using apiRouter to /api
 const apiRouter = require('./api');
 server.use('/api', apiRouter);
 
