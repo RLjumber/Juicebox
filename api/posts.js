@@ -1,11 +1,18 @@
 const express = require('express');
 const postsRouter = express.Router();
-const { getAllPosts } = require('../db')
+const { getAllPosts, createPost } = require('../db')
 const { requireUser } = require("./utils");
 
 
 postsRouter.post("/", requireUser, async (req, res, next) => {
-    console.log("this worked!")
+    console.log("this worked!");
+    const { title, content, tags = "" } = req.body;
+
+    const tagArr = tags.trim().split(/\s+/)
+    const postData = {};
+
+// STOPPED HERE!!!! Cant figure out how to get this to get hit as above issue
+
     res.send({ message: "under construction!" });
 })
 
